@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('app_id')->nullable();
             $table->string('token')->nullable();
             $table->string('appCertificate')->nullable();
-            $table->string('chanel')->nullable();
+            $table->string('channel')->nullable();
             $table->string('url')->nullable();
             $table->string('uid')->nullable();
             $table->timestamps();

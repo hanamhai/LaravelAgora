@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->bigInteger('random_user')->nullable();
             $table->bigInteger('name')->nullable();
-            $table->bigInteger('url')->nullable();
-            $table->bigInteger('status')->nullable();
+            $table->string('url')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
