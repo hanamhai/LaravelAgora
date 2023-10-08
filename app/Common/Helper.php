@@ -43,7 +43,7 @@ function cretaAgoraProject($name){
 function createToken($appId, $appCertificate, $channelName){
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://mehandrucompany.com/agoraToken/sample/RtcTokenBuilderSample.php',
+        CURLOPT_URL => 'http://127.0.0.1:8000/agoraToken/sample/RtcTokenBuilderSample.php',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

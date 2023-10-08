@@ -33,8 +33,8 @@ class MeetingController extends Controller
         $meeting->token = $token;
         $meeting->url = generateRamdomString();
         $meeting->save();
-        dd($token);
-        //prx($token);
+        // dd($token);
+        prx($token);
 
 
     }
