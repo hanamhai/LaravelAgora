@@ -29,3 +29,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/check', [MeetingController::class, 'meetingUser'])->name('check');
 Route::get('/createMeeting', [MeetingController::class, 'createMeeting'])->name('createMeeting');
+Route::post('/saveUserName', [MeetingController::class, 'saveUserName'])->name('saveUserName');
+

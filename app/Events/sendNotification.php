@@ -14,20 +14,24 @@ class sendNotification implements ShouldBroadcast
 {
   use Dispatchable, InteractsWithSockets, SerializesModels;
 
-  public $message;
+  public $data;
+  public $channel;
+  public $event;
 
-  public function __construct($message)
+  public function __construct($data, $channel, $event)
   {
-      $this->message = $message;
+      $this->data = $data;
+      $this->channel = $channel;
+      $this->event = $event;
   }
 
   public function broadcastOn()
   {
-      return ['my-channel'];
+      return [$this->channel];
   }
 
   public function broadcastAs()
   {
-      return 'my-event';
+      return $this->event;
   }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\sendNotification;
 use App\Models\MeetingEntry;
 use App\Models\UserMeeting;
 use App\Models\User;
@@ -56,15 +57,15 @@ class MeetingController extends Controller
             }else{
                 if(!Auth::User()){
                     $random_user = rand(111111, 999999);
-                    $event = generateRamdomString(5);                    
+                    $event = generateRamdomString(5);      
+                    Session::put('random_user', $random_user);    
                     $this->createEntry($meeting->user_id, $random_user, $meeting->url, $event, $meeting->channel);
                     $channel = $meeting->channel;
-                    //$event = $event;
                 }else{
                     $event = generateRamdomString(5);
                     $this->createEntry($meeting->user_id, Auth::User()->id, $meeting->url, $event, $meeting->channel);
                     $channel = $meeting->channel;
-                    //$event = $event;
+                    Session::put('random_user', Auth::User()->id);  
                 }
             }
             return view('joinUser', get_defined_vars());
@@ -84,5 +85,21 @@ class MeetingController extends Controller
         $entry->event = $event;
 
         $entry->save();
+    }
+
+    public function saveUserName(Request $request){
+        $saveName = MeetingEntry::where(['random_user' => $request->random, 'url' => $request->url])->first();
+        if($saveName->status == 3){
+
+        }else{
+            $saveName->name = $request->name;
+            $saveName->status = 1;
+            $saveName->save();
+
+            $meeting = UserMeeting::where('url', $request->url);
+            $data= ['random_user' => $request->random, 'title' => $saveName->name . 'wants to enter in the meeting'];
+            event(new sendNotification($data, $meeting->channel, $meeting->event));
+        }
+        
     }
 }
