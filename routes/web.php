@@ -30,4 +30,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/check', [MeetingController::class, 'meetingUser'])->name('check');
 Route::get('/createMeeting', [MeetingController::class, 'createMeeting'])->name('createMeeting');
 Route::post('/saveUserName', [MeetingController::class, 'saveUserName'])->name('saveUserName');
+Route::post('/meetingApprove', [MeetingController::class, 'meetingApprove'])->name('meetingApprove');
+Route::post('/callRecordTime', [MeetingController::class, 'callRecordTime'])->name('callRecordTime');
 

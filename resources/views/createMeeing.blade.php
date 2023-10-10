@@ -160,6 +160,27 @@ button{
 
   @if(Auth::User())
 <a href="{{url('createMeeting')}}"><button id="join-btn2">create Meeting</button></a>
+<table class="table" id="dataTable2">
+<thead>
+    <tr>
+        <th scope="col">S.no</th>
+        <th scope="col">Name</th>
+        <th scope="col">Meeting Url</th>
+        <th scope="col">Start time</th>
+        <th scope="col">End time</th>
+    </tr>
+</thead>
+<tbody>
+    <?php $i = 1?>
+    @foreach($data[0]['get_meetings'] as $list)
+        <th scope="row">{{$i++}}</th>
+        <th >{{$list->name}}</th>
+        <th >{{$list->url}}</th>
+        <th >{{$list->created_at}}</th>
+        <th >{{$list->updated_at}}</th>
+    @endforeach
+</tbody>
+</table>
 @endif
  
 

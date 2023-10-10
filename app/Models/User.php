@@ -46,4 +46,7 @@ class User extends Authenticatable
     public function getUserMeetingInfo(){
         return $this->hasOne(UserMeeting::class, 'user_id', 'id');
     }
+    public function getMeetings(){
+        return $this->hasMany(MeetingEntry::class, 'user_id', 'id');
+    }
 }

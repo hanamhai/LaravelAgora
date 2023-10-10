@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Session;
 class MeetingController extends Controller
 {
     public function meetingUser(){
-        return view('createMeeing');
+        $data = Auth::User()->with('getMeetings')->get();
+        return view('createMeeing', get_defined_vars());
     }
     public function createMeeting(){
         $meeting = Auth::User()->getUserMeetingInfo()->first() ?? null;
@@ -54,6 +55,7 @@ class MeetingController extends Controller
             if(Auth::User() && Auth::User()->id == $meeting->user_id){
                 $channel = $meeting->channel;
                 $event = $meeting->event;
+                $users = User::where('id', '=', Auth::User()->id)->get();
             }else{
                 if(!Auth::User()){
                     $random_user = rand(111111, 999999);
@@ -100,6 +102,24 @@ class MeetingController extends Controller
             $data= ['random_user' => $request->random, 'title' => $saveName->name . 'wants to enter in the meeting'];
             event(new sendNotification($data, $meeting->channel, $meeting->event));
         }
-        
+    }
+    public function meetingApprove(Request $request){
+        $saveName = MeetingEntry::where(['random_user' => $request->random, 'url' => $request->url])->first();
+        $saveName->status = $request->type;
+        if($request->type == 2){
+            $saveName->created_at = date("Y-m-d h:i:s");
+            $saveName->updated_at = date("Y-m-d h:i:s");
+
+        }
+        $saveName->save();
+        $data= ['status' => $request->type];
+        event(new sendNotification($data, $saveName->channel, $saveName->event));
+    }
+    public function callRecordTime(Request $request){
+        $saveName = MeetingEntry::where(['random_user' => $request->random, 'url' => $request->url])->first();
+        $saveName->updated_at = date("Y-m-d h:i:s");
+
+        $saveName->save(); 
+        return response()->json(['status' => 'success', 'msg' => 'time added']);
     }
 }

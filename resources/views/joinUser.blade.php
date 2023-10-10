@@ -39,6 +39,28 @@
     <!-- <input id="timer" type="hidden" value="0"> -->
     <input id="user_meeting" type="hidden" value="0">
     <input id="user_permission" type="hidden" value="0">
+    @if(session()->has('meeting'))
+    <table class="table" id="dataTable2">
+      <thead>
+          <tr>
+              <th scope="col">S.no</th>
+              <th scope="col">Name</th>
+              <th scope="col">Meeting Url</th>
+              <th scope="col">Start time</th>
+              <th scope="col">End time</th>
+          </tr>
+      </thead>
+      <tbody>
+          <?php $i = 1?>
+          @foreach($users as $list)
+              <th scope="row">{{$i++}}</th>
+              <td >{{$list->name}}</td>
+              <td >{{$list->email}}</td>
+              <td><a href="javascript:void(0)" onclick="sendMailNotification({{$list->email}})">Send Notification</a></td>
+          @endforeach
+      </tbody>
+    </table>
+    @endif
 
 </body>
 <script src="{{asset('agoraVideo/AgoraRTC_N-4.7.3.js')}}" ></script>
