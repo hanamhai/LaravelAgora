@@ -32,4 +32,6 @@ Route::get('/createMeeting', [MeetingController::class, 'createMeeting'])->name(
 Route::post('/saveUserName', [MeetingController::class, 'saveUserName'])->name('saveUserName');
 Route::post('/meetingApprove', [MeetingController::class, 'meetingApprove'])->name('meetingApprove');
 Route::post('/callRecordTime', [MeetingController::class, 'callRecordTime'])->name('callRecordTime');
+Route::post('/sendMailNotification', [MeetingController::class, 'sendMailNotification'])->name('sendMailNotification');
+
 

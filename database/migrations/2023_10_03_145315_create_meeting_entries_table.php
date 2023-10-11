@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('meeting_entries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->bigInteger('random_user')->nullable();
-            $table->bigInteger('name')->nullable();
+            $table->string('random_user')->nullable();
+            $table->string('name')->nullable();
             $table->string('url')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();

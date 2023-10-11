@@ -100,7 +100,7 @@ class MeetingController extends Controller
 
             $meeting = UserMeeting::where('url', $request->url);
             $data= ['random_user' => $request->random, 'title' => $saveName->name . 'wants to enter in the meeting'];
-            event(new sendNotification($data, $meeting->channel, $meeting->event));
+            // event(new sendNotification($data, $meeting->channel, $meeting->event));
         }
     }
     public function meetingApprove(Request $request){
@@ -113,7 +113,7 @@ class MeetingController extends Controller
         }
         $saveName->save();
         $data= ['status' => $request->type];
-        event(new sendNotification($data, $saveName->channel, $saveName->event));
+        // event(new sendNotification($data, $saveName->channel, $saveName->event));
     }
     public function callRecordTime(Request $request){
         $saveName = MeetingEntry::where(['random_user' => $request->random, 'url' => $request->url])->first();
@@ -121,5 +121,8 @@ class MeetingController extends Controller
 
         $saveName->save(); 
         return response()->json(['status' => 'success', 'msg' => 'time added']);
+    }
+    public function sendMailNotification(Request $request){
+
     }
 }

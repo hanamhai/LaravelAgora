@@ -14,6 +14,8 @@ class sendNotification implements ShouldBroadcast
 {
   use Dispatchable, InteractsWithSockets, SerializesModels;
 
+  public $desc;
+  public $type;
   public $data;
   public $channel;
   public $event;

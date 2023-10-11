@@ -56,7 +56,7 @@
               <th scope="row">{{$i++}}</th>
               <td >{{$list->name}}</td>
               <td >{{$list->email}}</td>
-              <td><a href="javascript:void(0)" onclick="sendMailNotification({{$list->email}})">Send Notification</a></td>
+              <td><a href="javascript:void(0)" onclick="sendMailNotification('{{$list->email}}')">Send Notification</a></td>
           @endforeach
       </tbody>
     </table>
@@ -67,6 +67,22 @@
 <script src="{{asset('agoraVideo/main.js')}}" ></script>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
   <script>
+    function sendMailNotification(){
+      url = "{{url('sendMailNotification')}}";
+    $.ajax({
+      url : url,
+      headers:{
+        'X-CSRF-TOKEN':'{{csrf_token()}}'
+      },
+      data:{
+        'email' : email,
+      },
+      type:'post',
+      success:function (result){
+
+      }
+    })
+    }
     // Pusher web socket initialise
     var notificationChannel = $('#channel').val();
     var notificationEvent =    $('#event').val();

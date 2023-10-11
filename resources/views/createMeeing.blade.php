@@ -172,13 +172,7 @@ button{
 </thead>
 <tbody>
     <?php $i = 1?>
-    @foreach($data[0]['get_meetings'] as $list)
-        <th scope="row">{{$i++}}</th>
-        <th >{{$list->name}}</th>
-        <th >{{$list->url}}</th>
-        <th >{{$list->created_at}}</th>
-        <th >{{$list->updated_at}}</th>
-    @endforeach
+    
 </tbody>
 </table>
 @endif
