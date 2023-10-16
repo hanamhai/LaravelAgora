@@ -101,6 +101,7 @@ let toggleMic = async (e) => {
 }
 
 let toggleCamera = async (e) => {
+    console.log(localTracks[1]);
     if (localTracks[1].muted) {
         await localTracks[1].setMuted(false)
         e.target.innerText = 'Camera on'

@@ -36,7 +36,7 @@ class MeetingController extends Controller
         $meeting = Auth::User()->getUserMeetingInfo()->first();
         $token = createToken($meeting->app_id, $meeting->appCertificate, $meeting->channel);
         $meeting->token = $token;
-        $meeting->url = generateRamdomString();
+        $meeting->url = generateRamdomString(5);
         $meeting->event = generateRamdomString(5);
         $meeting->save();
         if(Auth::User()->id == $meeting->user_id){
