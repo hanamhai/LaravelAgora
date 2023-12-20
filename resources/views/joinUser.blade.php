@@ -89,10 +89,9 @@
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
-    var pusher = new Pusher('6e227e25bffc3fe31b50', {
+    var pusher = new Pusher(`{{env('PUSHER_APP_KEY')}}`, {
       cluster: 'ap1'
     });
-
     var channel = pusher.subscribe(notificationChannel);
     channel.bind(notificationEvent, function(data) {
       @if(session()->has('meeting'))

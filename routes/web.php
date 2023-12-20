@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MeetingController;
 use Illuminate\Support\Facades\Auth;
@@ -33,5 +34,6 @@ Route::post('/saveUserName', [MeetingController::class, 'saveUserName'])->name('
 Route::post('/meetingApprove', [MeetingController::class, 'meetingApprove'])->name('meetingApprove');
 Route::post('/callRecordTime', [MeetingController::class, 'callRecordTime'])->name('callRecordTime');
 Route::post('/sendMailNotification', [MeetingController::class, 'sendMailNotification'])->name('sendMailNotification');
+Route::get('/location', [LocationController::class, 'index']);
 
 
